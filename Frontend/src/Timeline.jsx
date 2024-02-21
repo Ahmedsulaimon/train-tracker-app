@@ -55,4 +55,39 @@ function Timeline() {
   );
 }
 
-export default Timeline;
+// export default Timeline;
+// <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true}>
+// <TileLayer
+//   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+// />
+// {data &&
+//   data.allTrainSchedule &&
+//   data.allTrainSchedule.flatMap((trainMovements, index) =>
+//     trainMovements.map((movement, movementIndex) => (
+//       <>
+//         {/* <p> test{movement.latLong.latitude}</p> */}
+//         {movement.latLong && (
+//           <Marker
+//             key={`${index}-${movementIndex}`}
+//             position={[
+//               movement.latLong.latitude,
+//               movement.latLong.longitude,
+//             ]}
+//             // position={[51.505, -0.09]}
+//           >
+//             <Popup>
+//               A pretty CSS3 popup for <br /> {movement.location}
+//             </Popup>
+//             {/* <Polyline
+//           positions={[
+//             movement.latLong.latitude,
+//             movement.latLong.longitude,
+//           ]}
+//         /> */}
+//           </Marker>
+//         )}
+//       </>
+//     ))
+//   )}
+// </MapContainer>
