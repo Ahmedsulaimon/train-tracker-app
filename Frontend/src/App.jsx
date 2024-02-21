@@ -9,7 +9,9 @@ import {
 } from "react-leaflet";
 import { FaBeer } from "react-icons/fa";
 import Timeline from "./Timeline";
+import Button from "./Button";
 import "./App.css";
+
 
 function App() {
   const [data, setData] = useState(null);
@@ -45,6 +47,7 @@ function App() {
   }, []);
   return (
     <>
+    <Button />
       <div>
         {error && <p>Error: {error}</p>}
         <Timeline />
