@@ -1,7 +1,8 @@
 .leaflet-container {
   width: 100vw;
   height: 100vw;
-  object: fit;
+  object-fit: center;
+  border-radius: 20px;
 }
 
 /* #root {
