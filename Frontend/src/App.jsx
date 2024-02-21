@@ -11,6 +11,7 @@ import {
 import Navbar from "./Components/Navbar";
 import "./App.css";
 import { isBefore, isAfter, parseISO } from "date-fns";
+import Timeline from "./Timeline";
 
 function App() {
   const [data, setData] = useState(null);
@@ -52,45 +53,22 @@ function App() {
     height: "100%",
     border: "6px solid #ccc",
     borderRadius: "26px",
+   
   };
 
   return (
     <>
-      <Navbar />
-      <div>
-        <button></button>
-        {error && <p>Error: {error}</p>}
-        <h2>Received Data:</h2>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      </div>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "88vh" }}>
+    
+       <Navbar />
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "88vh", marginTop: "20px"}}>
         <div style={mapContainerStyle}>
-          <MapContainer
-            center={[51.505, -0.09]}
-            zoom={13}
-            scrollWheelZoom={true}
-            style={{ width: "100%", height: "100%" }}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[51.5, -0.15]}>
-              <Popup className="w-[550px]">
-                <nav className="flex items-center flex-wrap bg-gray-700 p-4 w-[500px]">
-                  <div className="flex items-center flex-shrink-0 text-white">
-                    <FaTrainSubway className="w-6 h-6 mr-1"/>
-                    <span className="font-semibold text-xl tracking-tight">Previous Journeys</span>
-                  </div>
-                </nav>
-                <Timeline className="p-6"/>
-              </Popup>
-            </Marker>
-            <Polyline positions={multiPolyline} />
-          </MapContainer>
-        </div>
-      <div className="text-center">
-        <MapContainer center={[51.505, -0.09]} zoom={11} scrollWheelZoom={true}>
+       
+        <MapContainer 
+        center={[51.505, -0.09]} 
+        zoom={11} 
+        scrollWheelZoom={true}
+        style={{ width: "100%", height: "100%" }}
+        >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -136,10 +114,17 @@ function App() {
                         lastMovement.latLong.longitude,
                       ]}
                     >
-                      <Popup>
-                        {trainInfo.toc_Name.map((toc) => (
+                      <Popup className="w-[550px]">
+                      <nav className="flex items-center flex-wrap bg-gray-700 p-4 w-[500px]">
+                  <div className="flex items-center flex-shrink-0 text-white">
+                    <FaTrainSubway className="w-6 h-6 mr-1"/>
+                    <span className="font-semibold text-xl tracking-tight">Previous Journeys</span>
+                  </div>
+                  </nav>
+                        {/* {trainInfo.toc_Name.map((toc) => (
                           <h3>{toc}</h3>
-                        ))}
+                        ))} */}
+                         <Timeline className="p-6"/>
                       </Popup>
                     </Marker>
                   )}
@@ -147,6 +132,7 @@ function App() {
               );
             })}
         </MapContainer>
+      </div>
       </div>
     </>
   );
