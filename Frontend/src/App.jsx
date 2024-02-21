@@ -12,7 +12,7 @@ import Navbar from "./Components/Navbar";
 import "./App.css";
 import { isBefore, isAfter, parseISO } from "date-fns";
 import Timeline from "./Timeline";
-import Button from "./Button";
+import Button from "./Components/Button";
 
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
     <Button />
      
       <div className="text-center">
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "88vh", marginTop: "20px"}}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh", marginTop: "20px"}}>
         <div style={mapContainerStyle}>
        
         <MapContainer 
