@@ -24,9 +24,9 @@ async function fetchDataFromAPI() {
   var yyyy = today.getFullYear();
 
   today = yyyy + '-' + mm + '-' + dd;
-  var TIPLOCS = "LEEDS"
+  var TIPLOCS = "LEEDS,YORK"
   var date = today.toString()
-  // console.log(today.toString());
+  console.log(today.toString());
   try {
     const response = await fetch(
       `https://traindata-stag-api.railsmart.io/api/trains/tiploc/${TIPLOCS}/${date} 00:00:00/${date} 23:59:59`,
@@ -39,7 +39,7 @@ async function fetchDataFromAPI() {
     );
     const data = await response.json();
 
-    const initialData = JSON.stringify(data)
+    //const initialData = JSON.stringify(data)
     console.log(data.length);
     const ids = [];
 
@@ -47,7 +47,7 @@ async function fetchDataFromAPI() {
     const encounteredPairs = {};
 
     data.forEach((item) => {
-      const { originTiploc, destinationTiploc, activationId, scheduleId, toc_Name } = item;
+      const { originTiploc, destinationTiploc, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name, cancelled } = item;
       const key = `${activationId}-${scheduleId}`;
 
       if (encounteredPairs[key]) {
@@ -58,12 +58,12 @@ async function fetchDataFromAPI() {
         }
       } else {
         // If pair not encountered yet, add new object to ids array
-        ids.push({ originTiploc, destinationTiploc, activationId, scheduleId, toc_Name: [toc_Name] });
+        ids.push({ originTiploc, destinationTiploc, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name: [toc_Name], cancelled });
         encounteredPairs[key] = true;
       }
     });
 
-
+    console.log(ids)
     const promises = ids.map(async (item) => {
       const movement = await fetch(
         `https://traindata-stag-api.railsmart.io/api/ifmtrains/movement/${item.activationId}/${item.scheduleId}`,
@@ -75,12 +75,12 @@ async function fetchDataFromAPI() {
         }
       );
       const trainMovement = await movement.json();
-      var trainMovementData = JSON.stringify(trainMovement)
-      return trainMovementData;
+      // var trainMovementData = JSON.stringify(trainMovement)
+      return trainMovement;
     });
 
     const allTrainMovement = await Promise.all(promises);
-    // console.log(allTrainMovement);
+    console.log(allTrainMovement.length);
 
 
     const promisesSchedule = ids.map(async (item) => {
@@ -94,15 +94,15 @@ async function fetchDataFromAPI() {
         }
       );
       const trainSchedule = await schedule.json();
-      var trainScheduleData = JSON.stringify(trainSchedule)
-      return trainScheduleData;
+      // var trainScheduleData = JSON.stringify(trainSchedule)
+      return trainSchedule;
     });
 
     const allTrainSchedule = await Promise.all(promisesSchedule);
-    console.log(allTrainSchedule);
+    // console.log(allTrainSchedule);
 
 
-    return { initialData, allTrainMovement, allTrainSchedule };
+    return { ids, allTrainMovement, allTrainSchedule };
 
   } catch (error) {
     console.error("Error fetching data:", error);
