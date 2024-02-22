@@ -194,6 +194,7 @@ function App() {
                                       date={
                                         <div className="flex">
                                           <span className="">
+                                            <div className="px-7">
                                             <h className=" font-semibold text-sm text-blue-500">
                                               Expected Departure Time:
                                             </h>
@@ -202,8 +203,10 @@ function App() {
                                                   movement.plannedDeparture
                                                 ).toLocaleTimeString()
                                               : "--"}
+                                              </div>
                                           </span>
                                         </div>
+                                        
                                       }
                                     >
                                       <h3
