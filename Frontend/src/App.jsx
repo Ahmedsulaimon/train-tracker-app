@@ -18,7 +18,7 @@ import "./App.css";
 import { isBefore, isAfter, parseISO } from "date-fns";
 import Timeline from "./Timeline";
 import Button from "./Components/Button";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowDown } from "react-icons/fa6";
 
 function App() {
   const [data, setData] = useState(null);
@@ -195,34 +195,32 @@ function App() {
                                         <div className="flex">
                                           <span className="">
                                             <div className="px-7">
-                                            <h className=" font-semibold text-sm text-blue-500">
-                                              Expected Departure Time:
-                                            </h>
-                                            {movement.plannedDeparture
-                                              ? new Date(
-                                                  movement.plannedDeparture
-                                                ).toLocaleTimeString()
-                                              : "--"}
-                                              </div>
+                                              <h className=" font-semibold text-sm text-blue-500">
+                                                Expected Departure Time:
+                                              </h>
+                                              {movement.plannedDeparture
+                                                ? new Date(
+                                                    movement.plannedDeparture
+                                                  ).toLocaleTimeString()
+                                                : "--"}
+                                            </div>
                                           </span>
                                         </div>
-                                        
                                       }
                                     >
                                       <div className="px-7">
-                                      <h3
-                                      
-                                        style={{
-                                          fontSize: "small",
-                                          fontWeight: "bold",
-                                        }}
-                                      >
-                                        {movement.location}
-                                      </h3>
-                                      <div className="flex">
-                                        <h className="mr-2 mt-4 font-semibold text-sm text-blue-400">
-                                          EventType(s):
-                                        </h>
+                                        <h3
+                                          style={{
+                                            fontSize: "small",
+                                            fontWeight: "bold",
+                                          }}
+                                        >
+                                          {movement.location}
+                                        </h3>
+                                        <div className="flex">
+                                          <h className="mr-2 mt-4 font-semibold text-sm text-blue-400">
+                                            EventType(s):
+                                          </h>
                                         </div>
                                         {movement.eventTypes &&
                                           movement.eventTypes.map(
@@ -235,7 +233,7 @@ function App() {
                                                   {e}
                                                   {movement.eventTypes.length >
                                                     1 && (
-                                                    <FaArrowRight className=" m-1 text-blue-600" />
+                                                    <FaArrowDown className=" m-1 text-blue-600 " />
                                                   )}
                                                 </p>
                                               </div>
