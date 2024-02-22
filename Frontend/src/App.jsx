@@ -66,7 +66,7 @@ function App() {
         >
           <div style={mapContainerStyle}>
             <MapContainer
-              center={[51.505, -0.09]}
+              center={[53.79648, -1.54785]}
               zoom={9}
               scrollWheelZoom={true}
               style={{ width: "100%", height: "100%" }}
