@@ -209,9 +209,11 @@ function App() {
                                         
                                       }
                                     >
+                                      <div className="px-7">
                                       <h3
+                                      
                                         style={{
-                                          fontSize: "larger",
+                                          fontSize: "small",
                                           fontWeight: "bold",
                                         }}
                                       >
@@ -221,6 +223,7 @@ function App() {
                                         <h className="mr-2 mt-4 font-semibold text-sm text-blue-400">
                                           EventType(s):
                                         </h>
+                                        </div>
                                         {movement.eventTypes &&
                                           movement.eventTypes.map(
                                             (e, eventTypeIndex) => (
