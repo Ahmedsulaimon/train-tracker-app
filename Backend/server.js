@@ -24,7 +24,8 @@ async function fetchDataFromAPI() {
   var yyyy = today.getFullYear();
 
   today = yyyy + '-' + mm + '-' + dd;
-  var TIPLOCS = "LEEDS,YORK"
+  // LEEDS,YORK,HULL,KNGX,NWCSTLE,SKPT
+  var TIPLOCS = "LEEDS"
   var date = today.toString()
   console.log(today.toString());
   try {
@@ -47,7 +48,7 @@ async function fetchDataFromAPI() {
     const encounteredPairs = {};
 
     data.forEach((item) => {
-      const { originTiploc, destinationTiploc, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name, cancelled } = item;
+      const { originLocation, destinationLocation, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name, cancelled } = item;
       const key = `${activationId}-${scheduleId}`;
 
       if (encounteredPairs[key]) {
@@ -58,7 +59,7 @@ async function fetchDataFromAPI() {
         }
       } else {
         // If pair not encountered yet, add new object to ids array
-        ids.push({ originTiploc, destinationTiploc, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name: [toc_Name], cancelled });
+        ids.push({ originLocation, destinationLocation, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name: [toc_Name], cancelled });
         encounteredPairs[key] = true;
       }
     });
@@ -82,6 +83,39 @@ async function fetchDataFromAPI() {
     const allTrainMovement = await Promise.all(promises);
     console.log(allTrainMovement.length);
 
+    const processedTrainMovement = [];
+
+    allTrainMovement.forEach((item) => {
+      const trainMovements = [];
+      item.forEach((movement) => {
+        // Destructure movement object
+        const { location, eventType, plannedDeparture, latLong } = movement;
+        // Check if location exists, skip to the next iteration if not
+        if (!location) return;
+
+        // Find index of existing location in the array
+        const existingLocationIndex = trainMovements.findIndex((elem) => elem.location === location);
+
+        // If location exists in the array, add the new eventType to it
+        if (existingLocationIndex !== -1) {
+          trainMovements[existingLocationIndex].eventTypes.push(eventType);
+        } else {
+          // If location doesn't exist, create a new entry
+          trainMovements.push({
+            location,
+            eventTypes: [eventType],
+            plannedDeparture,
+            latLong
+          });
+        }
+      });
+
+      // Push the processed movements for the current item
+      processedTrainMovement.push(trainMovements);
+    });
+
+    console.log(processedTrainMovement);
+
 
     const promisesSchedule = ids.map(async (item) => {
       const schedule = await fetch(
@@ -102,7 +136,7 @@ async function fetchDataFromAPI() {
     // console.log(allTrainSchedule);
 
 
-    return { ids, allTrainMovement, allTrainSchedule };
+    return { processedTrainMovement, ids, allTrainMovement, allTrainSchedule };
 
   } catch (error) {
     console.error("Error fetching data:", error);
