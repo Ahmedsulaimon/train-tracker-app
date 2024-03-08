@@ -197,7 +197,7 @@ import {
   Popup,
 } from "react-leaflet";
 import Navbar from "../Components/Navbar";
-import Button from "../Components/Button";
+import Timeline from "../Components/Timeline";
 import LocationName from "../Components/getUserLocation/getCoordinate";
 
 function Home() {
@@ -249,7 +249,7 @@ function Home() {
         >
           <div style={{ width: "100%", height: "100%" }}>
             <div style={{ marginBottom: "10px" }}>
-              {data &&
+              {/* {data &&
                 data.allTrainSchedule &&
                 data.ids &&
                 data.allTrainSchedule.map((trainMovements, index) => {
@@ -262,9 +262,10 @@ function Home() {
                     >
                       {trainInfo.originLocation} to{" "}
                       {trainInfo.destinationLocation}
+                      {}
                     </button>
                   );
-                })}
+                })} */}
             </div>
             <div style={mapContainerStyle}>
               <MapContainer
@@ -377,6 +378,10 @@ function Home() {
                                   </div>
                                 </div>
                               </div>
+                              <Timeline
+                                className="p-6"
+                                trainMovements={trainMovements}
+                              />
                             </Popup>
                           </Marker>
                         )}

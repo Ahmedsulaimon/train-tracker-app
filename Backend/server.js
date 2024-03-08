@@ -26,7 +26,7 @@ async function fetchDataFromAPI() {
   today = yyyy + '-' + mm + '-' + dd;
   // LEEDS,YORK,HULL,KNGX,NWCSTLE,SKPT,DONC
   //AIzaSyDUQBtCGL6_KtW0FJrCtCmfr_P7R0C-7T0
-  var TIPLOCS = "YORK"
+  var TIPLOCS = "DONC"
   var date = today.toString()
   console.log(today.toString());
   try {
