@@ -197,6 +197,9 @@ import {
   Popup,
 } from "react-leaflet";
 import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
+import SidebarLeft from "../Components/SidebarLeft";
+import SidebarRight from "../Components/SidebarRight";
 import Timeline from "../Components/Timeline";
 import LocationName from "../Components/getUserLocation/getCoordinate";
 
@@ -204,6 +207,8 @@ function Home() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [selectedJourney, setSelectedJourney] = useState(0);
+  const [isSidebarLeftOpen, setIsSidebarLeftOpen] = useState(false);
+  const [isSidebarRightOpen, setIsSidebarRightOpen] = useState(false);
 
   useEffect(() => {
     const socket = socketIOClient("http://localhost:3001");
@@ -225,30 +230,43 @@ function Home() {
     setSelectedJourney(journeyId);
   };
 
+  const toggleSidebarLeft = () => {
+    setIsSidebarLeftOpen(!isSidebarLeftOpen);
+  };
+
+  const toggleSidebarRight = () => {
+    setIsSidebarRightOpen(!isSidebarRightOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarLeftOpen(false);
+    setIsSidebarRightOpen(false);
+  };
+
+
   const currentDateTime = new Date();
 
   const mapContainerStyle = {
-    width: "88%",
+    position: "fixed",
+    width: "100%",
     height: "100%",
-    border: "6px solid #ccc",
-    borderRadius: "26px",
   };
 
   return (
     <>
-      <Navbar />
+      <SidebarLeft isOpen={isSidebarLeftOpen} closeSidebar={closeSidebar} />
+      <SidebarRight isOpen={isSidebarRightOpen} closeSidebar={closeSidebar} />
+      <Navbar toggleSidebarLeft={toggleSidebarLeft} toggleSidebarRight={toggleSidebarRight} />
       <div className="text-center">
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "80vh",
-            marginTop: "20px",
+            position: "absolute",
+            overflowY: "auto",
+            overflowX: "hidden",
           }}
         >
           <div style={{ width: "100%", height: "100%" }}>
-            <div style={{ marginBottom: "10px" }}>
+            <div style={{ marginBottom: "0px" }}>
               {/* {data &&
                 data.allTrainSchedule &&
                 data.ids &&
@@ -393,6 +411,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
