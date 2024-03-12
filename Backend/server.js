@@ -16,7 +16,13 @@ const io = socketIo(server, {
 });
 
 
-async function fetchDataFromAPI() {
+async function fetchDataFromAPI(tiploc) {
+
+  if (!tiploc) {
+    tiploc = "DONC"; // Default value
+  }
+  console.log("tip:" + tiploc)
+
   //get the current date
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -27,11 +33,12 @@ async function fetchDataFromAPI() {
   // LEEDS,YORK,HULL,KNGX,NWCSTLE,SKPT,DONC
   //AIzaSyDUQBtCGL6_KtW0FJrCtCmfr_P7R0C-7T0
   var TIPLOCS = "DONC"
+
   var date = today.toString()
   console.log(today.toString());
   try {
     const response = await fetch(
-      `https://traindata-stag-api.railsmart.io/api/trains/tiploc/${TIPLOCS}/${date} 00:00:00/${date} 23:59:59`,
+      `https://traindata-stag-api.railsmart.io/api/trains/tiploc/${tiploc}/${date} 00:00:00/${date} 23:59:59`,
       {
         headers: {
           "X-ApiVersion": process.env.API_VERSION,
@@ -42,7 +49,7 @@ async function fetchDataFromAPI() {
     const data = await response.json();
 
     //const initialData = JSON.stringify(data)
-    console.log(data.length);
+    console.log(data);
     const ids = [];
 
     // Keep track of encountered pairs of activationId and scheduleId
@@ -65,7 +72,7 @@ async function fetchDataFromAPI() {
       }
     });
 
-    console.log(ids)
+    // console.log(ids)
     const promises = ids.map(async (item) => {
       const movement = await fetch(
         `https://traindata-stag-api.railsmart.io/api/ifmtrains/movement/${item.activationId}/${item.scheduleId}`,
@@ -115,7 +122,7 @@ async function fetchDataFromAPI() {
       processedTrainMovement.push(trainMovements);
     });
 
-    console.log(processedTrainMovement);
+    // console.log(processedTrainMovement);
 
 
     const promisesSchedule = ids.map(async (item) => {
@@ -154,22 +161,60 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.json({ mssg: "welcome to the app" });
 });
+
+let tiploc = "DONC";
+
+// Function to periodically fetch data from the API and emit updates
+const fetchDataAndUpdate = async () => {
+  try {
+    const data = await fetchDataFromAPI(tiploc);
+    io.emit("dataUpdate", data); // Emit to all connected clients
+  } catch (error) {
+    console.error("Error fetching and emitting data:", error);
+    // Optionally, emit an error to all clients
+    io.emit("dataError", "Failed to fetch data.");
+  }
+};
+
+// Initial call to fetchDataAndUpdate
+fetchDataAndUpdate();
+
+// Set up the setInterval to periodically call fetchDataAndUpdate
+setInterval(async () => {
+  await fetchDataAndUpdate()
+}, 50000); // 5000 milliseconds = 5 seconds
+
+// Listen for tiplocSelected event
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  // Emit data to this specific client immediately upon connection
-  fetchDataFromAPI().then((data) => {
-    socket.emit("dataUpdate", data);
+  socket.on("tiplocSelected", async (data) => {
+    const { tiploc: newTiploc } = data;
+    console.log(`Tiploc selected: ${newTiploc}`);
+    tiploc = newTiploc; // Update the tiploc value
+
+    try {
+      fetchDataFromAPI(tiploc).then((data) => {
+        socket.emit("dataUpdate", data);
+      });
+
+      const data = await fetchDataFromAPI(tiploc); // Correctly wait for the data
+      io.emit("dataUpdate", data); // Emit to the specific socket/client that requested it
+    } catch (error) {
+      console.error("Error fetching and emitting data:", error);
+      // Optionally, emit an error to the client
+      socket.emit("dataError", "Failed to fetch data.");
+    }
+  });
+
+  // Handle disconnection
+  socket.on("disconnect", () => {
+    console.log(`User Disconnected: ${socket.id}`);
+
   });
 });
 
-// Emit data to all clients every 5 seconds
-setInterval(async () => {
-  const data = await fetchDataFromAPI();
-  io.emit("dataUpdate", data);
-}, 500000); // 5000 milliseconds = 5 seconds
-
-//listening for requests
+// Listening for requests
 server.listen(process.env.PORT, () => {
-  console.log(`listening on port ${process.env.PORT} `);
+  console.log(`Listening on port ${process.env.PORT}`);
 });
