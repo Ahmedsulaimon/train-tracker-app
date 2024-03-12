@@ -210,7 +210,6 @@ io.on("connection", (socket) => {
   // Handle disconnection
   socket.on("disconnect", () => {
     console.log(`User Disconnected: ${socket.id}`);
-
   });
 });
 

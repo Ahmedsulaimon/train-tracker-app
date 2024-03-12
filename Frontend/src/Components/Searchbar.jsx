@@ -20,7 +20,7 @@ const SearchBar = ({ data }) => {
     );
 
     setFilteredResults(results);
-  }, 300);
+  }, 3000);
 
   useEffect(() => {
     handleSearch(searchQuery);
