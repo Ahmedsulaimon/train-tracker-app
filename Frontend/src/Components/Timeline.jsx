@@ -8,7 +8,7 @@ import { FaTrainSubway } from "react-icons/fa6";
 
 function Timeline({ trainMovements }) {
   return (
-    <div className="overflow-y-auto touch-pan-y h-80 w-[500px] experience leading-8">
+    <div className=" touch-pan-y  experience leading-8">
       <VerticalTimeline lineColor="#000">
         {trainMovements.map((movement, movementIndex) => {
           // Extracting keys that are not metadata

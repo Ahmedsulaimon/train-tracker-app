@@ -22,7 +22,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
       </div>
       <div className="sidebar-content">
         <div className="sidebar-content-inner overflow-y-auto h-[970px]">
-          <div className="flex  flex-wrap bg-gray-700 p-2 w-[500px] leading-6">
+          <div className="flex  flex-wrap bg-gray-700 p-2  leading-6">
             <div className=" text-white mt-1">
               <div className=" flex">
                 <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">

@@ -83,7 +83,28 @@ function Home() {
         data={data}
         handleJourneySelect={handleJourneySelect}
       />
+      {data &&
+        data.allTrainSchedule &&
+        data.ids &&
+        data.processedTrainMovement &&
+        data.allTrainSchedule.map((trainMovements, index) => {
+          const trainInfo = data.ids[index];
 
+          if (!trainInfo) return null;
+
+          return (
+            <React.Fragment key={index}>
+              {selectedJourney === index && (
+                <SidebarRight
+                  isOpen={isSidebarRightOpen}
+                  closeSidebar={closeSidebar}
+                  trainMovements={trainMovements}
+                  trainInfo={trainInfo}
+                />
+              )}
+            </React.Fragment>
+          );
+        })}
       <Navbar
         toggleSidebarLeft={toggleSidebarLeft}
         toggleSidebarRight={toggleSidebarRight}
@@ -224,12 +245,12 @@ function Home() {
                               />
                             </Popup> */}
                             </Marker>
-                            <SidebarRight
+                            {/* <SidebarRight
                               isOpen={isSidebarRightOpen}
                               closeSidebar={closeSidebar}
                               trainMovements={trainMovements}
                               trainInfo={trainInfo}
-                            />
+                            /> */}
                           </>
                         )}
                       </React.Fragment>
