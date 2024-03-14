@@ -15,6 +15,7 @@ import SidebarLeft from "../Components/SidebarLeft";
 import SidebarRight from "../Components/SidebarRight";
 import Timeline from "../Components/Timeline";
 import LocationName from "../Components/getUserLocation/getCoordinate";
+import LocationMarker from "../Components/UpdatePosition";
 
 function Home() {
   const [data, setData] = useState(null);
@@ -22,6 +23,7 @@ function Home() {
   const [selectedJourney, setSelectedJourney] = useState(0);
   const [isSidebarLeftOpen, setIsSidebarLeftOpen] = useState(false);
   const [isSidebarRightOpen, setIsSidebarRightOpen] = useState(false);
+  const [location, setLocation] = useState({ lat: 53.79648, lng: -1.54785 });
   console.log(error);
   console.log(data);
 
@@ -57,7 +59,13 @@ function Home() {
     setIsSidebarLeftOpen(false);
     setIsSidebarRightOpen(false);
   };
-
+  const moveToLocation = (lat, lng) => {
+    setLocation({ lat, lng });
+  };
+  const openBothSideBars = (open) => {
+    setIsSidebarLeftOpen(open);
+    setIsSidebarRightOpen(open);
+  };
 
   const currentDateTime = new Date();
 
@@ -71,8 +79,15 @@ function Home() {
     <>
       <SidebarLeft isOpen={isSidebarLeftOpen} closeSidebar={closeSidebar} />
       <SidebarRight isOpen={isSidebarRightOpen} closeSidebar={closeSidebar} />
-      <Navbar toggleSidebarLeft={toggleSidebarLeft} toggleSidebarRight={toggleSidebarRight} />
-      <SearchBar data={TiplocData} />
+      <Navbar
+        toggleSidebarLeft={toggleSidebarLeft}
+        toggleSidebarRight={toggleSidebarRight}
+      />
+      <SearchBar
+        data={TiplocData}
+        moveToLocation={moveToLocation}
+        openSideBars={openBothSideBars}
+      />
       <div className="text-center">
         <div
           style={{
@@ -82,7 +97,7 @@ function Home() {
           }}
         >
           <div style={{ width: "100%", height: "100%" }}>
-            <div style={{ marginBottom: "10px" }}>
+            {/* <div style={{ marginBottom: "10px" }}>
               {data ? (
                 data.ids &&
                 data.allTrainSchedule &&
@@ -123,12 +138,12 @@ function Home() {
               ) : (
                 <p>Loading...</p>
               )}
-            </div>
+            </div> */}
 
             <div style={mapContainerStyle}>
               <MapContainer
-                center={[53.79648, -1.54785]}
-                zoom={9}
+                center={location}
+                zoom={8}
                 scrollWheelZoom={true}
                 style={{ width: "100%", height: "100%" }}
               >
@@ -246,6 +261,7 @@ function Home() {
                       </React.Fragment>
                     );
                   })}
+                <LocationMarker lat={location.lat} lng={location.lng} />
               </MapContainer>
             </div>
           </div>

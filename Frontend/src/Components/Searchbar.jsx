@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { debounce } from "lodash";
 import socketIOClient from "socket.io-client";
-const SearchBar = ({ data }) => {
+const SearchBar = ({ data, moveToLocation, openSideBars }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const [selectedTiploc, setSelectedTiploc] = useState("");
@@ -55,6 +55,8 @@ const SearchBar = ({ data }) => {
             onClick={() => {
               setSelectedTiploc(result.Tiploc);
               setSearchQuery("");
+              moveToLocation(result.Latitude, result.Longitude);
+              openSideBars(true);
             }}
             className=" mr-3"
           >
