@@ -64,7 +64,7 @@ const SearchBar = ({ data, moveToLocation, openSideBars }) => {
           </button>
         ))}
       </div>
-      {selectedTiploc && <p>Selected TIPLOC: {selectedTiploc}</p>}
+      {/* {selectedTiploc && <p>Selected TIPLOC: {selectedTiploc}</p>} */}
     </div>
   );
 };

@@ -185,72 +185,7 @@ function Home() {
                                 lastMovement.latLong.latitude,
                                 lastMovement.latLong.longitude,
                               ]}
-                            >
-                              {/* <Timeline
-                              className="p-6"
-                              trainMovements={trainMovements}
-                            /> */}
-                              {/* <Popup className="w-[550px] ">
-                              <div className="flex  flex-wrap bg-gray-700 p-2 w-[500px] leading-6">
-                                <div className=" text-white mt-1">
-                                  <div className=" flex">
-                                    <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
-                                      Operating Company (s):
-                                    </span>
-                                    {trainInfo.toc_Name.map((toc, index) => (
-                                      <h3
-                                        className=" mr-2 font-bold text-gray-200  "
-                                        key={index}
-                                      >
-                                        {toc}.
-                                      </h3>
-                                    ))}
-                                  </div>
-                                  <div className=" flex">
-                                    <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
-                                      Train Journey:
-                                    </span>
-                                    <h3 className="font-bold text-gray-200">
-                                      {trainInfo.originLocation}
-                                      <span className="font-semibold text-sm tracking-tight mx-3 text-gray-500">
-                                        to
-                                      </span>
-                                      {trainInfo.destinationLocation}
-                                    </h3>
-                                  </div>
-                                  <div>
-                                    <div className="flex ">
-                                      <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
-                                        {" "}
-                                        Expected Departure Time:
-                                      </span>
-                                      <h3 className="font-bold text-gray-200 ">
-                                        {scheduledDeparture.toLocaleString()}
-                                      </h3>
-                                    </div>
-                                    <div className="flex">
-                                      <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
-                                        Expected Arrival Time:
-                                      </span>
-                                      <h3 className=" font-bold text-gray-200">
-                                        {scheduledArrival.toLocaleString()}
-                                      </h3>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <Timeline
-                                className="p-6"
-                                trainMovements={trainMovements}
-                              />
-                            </Popup> */}
-                            </Marker>
-                            {/* <SidebarRight
-                              isOpen={isSidebarRightOpen}
-                              closeSidebar={closeSidebar}
-                              trainMovements={trainMovements}
-                              trainInfo={trainInfo}
-                            /> */}
+                            ></Marker>
                           </>
                         )}
                       </React.Fragment>

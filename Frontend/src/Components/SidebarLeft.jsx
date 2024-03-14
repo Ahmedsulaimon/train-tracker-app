@@ -6,7 +6,7 @@ const SidebarLeft = ({ isOpen, closeSidebar, data, handleJourneySelect }) => {
 
   return (
     <div
-      className={`fixed inset-y-0 left-0 z-50 w-64 bg-white transition duration-300 ease-in-out transform ${
+      className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-100 transition duration-300 ease-in-out transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -44,7 +44,7 @@ const SidebarLeft = ({ isOpen, closeSidebar, data, handleJourneySelect }) => {
                     <button
                       key={index}
                       onClick={() => handleJourneySelect(index)}
-                      className="bg-blue-600 text-white font-semibold m-3"
+                      className=" bg-gray-700 text-white font-semibold m-2 rounded-xl p-1"
                     >
                       {trainInfo.originLocation} to{" "}
                       {trainInfo.destinationLocation} - {status}

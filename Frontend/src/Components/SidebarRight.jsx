@@ -8,7 +8,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
 
   return (
     <div
-      className={`fixed inset-y-0 right-0 z-50 w-[400px] bg-white transition duration-300 ease-in-out transform ${
+      className={`fixed inset-y-0 right-0 z-50 w-[400px] bg-slate-100 transition duration-300 ease-in-out transform ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
