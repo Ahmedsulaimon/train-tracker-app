@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoIosSettings, IoIosMenu, IoIosClose } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
+import TiplocData from "../data/tiplocs.json";
+import SearchBar from "../Components/Searchbar";
 
 const Navbar = ({ toggleSidebarLeft, toggleSidebarRight }) => {
   return (
@@ -21,13 +23,8 @@ const Navbar = ({ toggleSidebarLeft, toggleSidebarRight }) => {
           </div>
 
           <div className="flex rounded-md max-w-[500px] w-full justify-center">
-            <input
-              type="text"
-              name="q"
-              id="query"
-              placeholder="Train History"
-              className="w-full p-3 rounded-md border-2 border-r-white rounded-r-none border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none"
-            />
+          <SearchBar data={TiplocData} />
+  
             <button className="inline-flex items-center gap-2 bg-gray-700 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
               <span>
                 <FaSearch />

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
-import TiplocData from "../data/tiplocs.json";
-import SearchBar from "../Components/Searchbar";
 import {
   MapContainer,
   TileLayer,
@@ -72,7 +70,7 @@ function Home() {
       <SidebarLeft isOpen={isSidebarLeftOpen} closeSidebar={closeSidebar} />
       <SidebarRight isOpen={isSidebarRightOpen} closeSidebar={closeSidebar} />
       <Navbar toggleSidebarLeft={toggleSidebarLeft} toggleSidebarRight={toggleSidebarRight} />
-      <SearchBar data={TiplocData} />
+      
       <div className="text-center">
         <div
           style={{
