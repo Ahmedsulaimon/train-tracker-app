@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
-import TiplocData from "../data/tiplocs.json";
-import SearchBar from "../Components/Searchbar";
 import {
   MapContainer,
   TileLayer,
@@ -16,13 +14,15 @@ import SidebarRight from "../Components/SidebarRight";
 import Timeline from "../Components/Timeline";
 import LocationName from "../Components/getUserLocation/getCoordinate";
 import LocationMarker from "../Components/UpdatePosition";
-
+import SearchBar from "../Components/Searchbar";
+import TiplocData from "../data/tiplocs.json";
 function Home() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [selectedJourney, setSelectedJourney] = useState(0);
   const [isSidebarLeftOpen, setIsSidebarLeftOpen] = useState(false);
   const [isSidebarRightOpen, setIsSidebarRightOpen] = useState(false);
+  const [trainMovements, setTrainMovement] = useState(null);
   const [location, setLocation] = useState({ lat: 53.79648, lng: -1.54785 });
   console.log(error);
   console.log(data);
@@ -77,8 +77,13 @@ function Home() {
 
   return (
     <>
-      <SidebarLeft isOpen={isSidebarLeftOpen} closeSidebar={closeSidebar} />
-      <SidebarRight isOpen={isSidebarRightOpen} closeSidebar={closeSidebar} />
+      <SidebarLeft
+        isOpen={isSidebarLeftOpen}
+        closeSidebar={closeSidebar}
+        data={data}
+        handleJourneySelect={handleJourneySelect}
+      />
+
       <Navbar
         toggleSidebarLeft={toggleSidebarLeft}
         toggleSidebarRight={toggleSidebarRight}
@@ -97,49 +102,6 @@ function Home() {
           }}
         >
           <div style={{ width: "100%", height: "100%" }}>
-            {/* <div style={{ marginBottom: "10px" }}>
-              {data ? (
-                data.ids &&
-                data.allTrainSchedule &&
-                data.allTrainSchedule.length > 0 ? (
-                  data.allTrainSchedule.map((trainMovements, index) => {
-                    const trainInfo = data.ids[index];
-                    const scheduledDeparture = new Date(
-                      trainInfo.scheduledDeparture
-                    );
-                    const scheduledArrival = new Date(
-                      trainInfo.scheduledArrival
-                    );
-                    let status = "Active";
-
-                    if (trainInfo.cancelled) {
-                      status = "Cancelled";
-                    } else if (currentDateTime < scheduledDeparture) {
-                      status = "Not Started";
-                    } else if (currentDateTime > scheduledArrival) {
-                      status = "Terminated";
-                    }
-                    return (
-                      <button
-                        key={index}
-                        onClick={() => handleJourneySelect(index)}
-                        className="bg-blue-600 text-white font-semibold m-3"
-                      >
-                        {trainInfo.originLocation} to{" "}
-                        {trainInfo.destinationLocation} - {status}
-                      </button>
-                    );
-                  })
-                ) : data === null ? (
-                  <p>Loading...</p>
-                ) : (
-                  <p>Not found</p>
-                )
-              ) : (
-                <p>Loading...</p>
-              )}
-            </div> */}
-
             <div style={mapContainerStyle}>
               <MapContainer
                 center={location}
@@ -196,13 +158,18 @@ function Home() {
                           />
                         )}
                         {selectedJourney === index && lastMovement && (
-                          <Marker
-                            position={[
-                              lastMovement.latLong.latitude,
-                              lastMovement.latLong.longitude,
-                            ]}
-                          >
-                            <Popup className="w-[550px] ">
+                          <>
+                            <Marker
+                              position={[
+                                lastMovement.latLong.latitude,
+                                lastMovement.latLong.longitude,
+                              ]}
+                            >
+                              {/* <Timeline
+                              className="p-6"
+                              trainMovements={trainMovements}
+                            /> */}
+                              {/* <Popup className="w-[550px] ">
                               <div className="flex  flex-wrap bg-gray-700 p-2 w-[500px] leading-6">
                                 <div className=" text-white mt-1">
                                   <div className=" flex">
@@ -255,8 +222,15 @@ function Home() {
                                 className="p-6"
                                 trainMovements={trainMovements}
                               />
-                            </Popup>
-                          </Marker>
+                            </Popup> */}
+                            </Marker>
+                            <SidebarRight
+                              isOpen={isSidebarRightOpen}
+                              closeSidebar={closeSidebar}
+                              trainMovements={trainMovements}
+                              trainInfo={trainInfo}
+                            />
+                          </>
                         )}
                       </React.Fragment>
                     );
