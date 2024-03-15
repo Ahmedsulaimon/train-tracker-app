@@ -19,7 +19,7 @@ const SidebarLeft = ({ isOpen, closeSidebar, data, handleJourneySelect }) => {
         </button>
       </div>
       <div className="sidebar-content">
-        <div className="sidebar-content-inner overflow-y-auto h-[970px]">
+        <div className="sidebar-content-inner overflow-y-auto h-screen pb-32">
           <div style={{ marginBottom: "10px" }}>
             {data ? (
               data.ids &&

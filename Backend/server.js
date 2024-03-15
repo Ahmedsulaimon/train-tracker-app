@@ -89,7 +89,7 @@ async function fetchDataFromAPI(tiploc) {
     });
 
     const allTrainMovement = await Promise.all(promises);
-    console.log(allTrainMovement.length);
+    //console.log(allTrainMovement);
 
     const processedTrainMovement = [];
 
@@ -97,7 +97,7 @@ async function fetchDataFromAPI(tiploc) {
       const trainMovements = [];
       item.forEach((movement) => {
         // Destructure movement object
-        const { location, eventType, plannedDeparture, latLong } = movement;
+        const { location, eventType, planned, actual, latLong } = movement;
         // Check if location exists, skip to the next iteration if not
         if (!location) return;
 
@@ -112,7 +112,8 @@ async function fetchDataFromAPI(tiploc) {
           trainMovements.push({
             location,
             eventTypes: [eventType],
-            plannedDeparture,
+            planned,
+            actual,
             latLong
           });
         }
@@ -122,7 +123,7 @@ async function fetchDataFromAPI(tiploc) {
       processedTrainMovement.push(trainMovements);
     });
 
-    // console.log(processedTrainMovement);
+    console.log(processedTrainMovement);
 
 
     const promisesSchedule = ids.map(async (item) => {
@@ -182,7 +183,7 @@ fetchDataAndUpdate();
 // Set up the setInterval to periodically call fetchDataAndUpdate
 setInterval(async () => {
   await fetchDataAndUpdate()
-}, 50000); // 5000 milliseconds = 5 seconds
+}, 60000); // 5000 milliseconds = 5 seconds
 
 // Listen for tiplocSelected event
 io.on("connection", (socket) => {

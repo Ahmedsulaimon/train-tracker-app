@@ -37,13 +37,13 @@ function Timeline({ trainMovements }) {
                           detail.type.slice(1)}{" "}
                         Time:
                       </p>
-                      <p>{detail.time || "--"}</p>
+                      <span>{detail.time || "--"}</span>
                     </div>
                   ))}
                 </div>
               }
             >
-              <div className="px-7">
+              <div className="px-2">
                 <h3
                   style={{
                     fontSize: "small",

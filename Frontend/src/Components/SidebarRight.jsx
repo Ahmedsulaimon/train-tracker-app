@@ -21,46 +21,49 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
         </button>
       </div>
       <div className="sidebar-content">
-        <div className="sidebar-content-inner overflow-y-auto h-[970px]">
+        <div className="sidebar-content-inner overflow-y-auto h-screen pb-32">
           <div className="flex  flex-wrap bg-gray-700 p-2  leading-6">
             <div className=" text-white mt-1">
-              <div className=" flex">
-                <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
+              <div className=" flex border border-b-2 border-gray-600 border-x-0 border-t-0 pb-2">
+                <span className="font-semibold text-base tracking-tight mr-1 text-blue-400">
                   Operating Company (s):
                 </span>
                 {trainInfo.toc_Name.map((toc, index) => (
-                  <h3 className=" mr-2 font-bold text-gray-200  " key={index}>
+                  <h3
+                    className=" mr-1 font-semibold text-sm text-gray-200 "
+                    key={index}
+                  >
                     {toc}.
                   </h3>
                 ))}
               </div>
-              <div className=" flex">
-                <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
+              <div className=" flex  border border-b-2 border-gray-600 border-x-0 border-t-0 py-2">
+                <span className="font-semibold text-base tracking-tight mr-14 text-blue-400">
                   Train Journey:
                 </span>
-                <h3 className="font-bold text-gray-200">
+                <h3 className="font-semibold text-sm text-gray-200">
                   {trainInfo.originLocation}
-                  <span className="font-semibold text-sm tracking-tight mx-3 text-gray-500">
+                  <span className="font-semibold text-xs tracking-tight mx-3 text-gray-500">
                     to
                   </span>
                   {trainInfo.destinationLocation}
                 </h3>
               </div>
               <div>
-                <div className="flex ">
+                <div className="flex  border border-b-2 border-gray-600 border-x-0 border-t-0 py-2">
                   <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
                     {" "}
                     Expected Departure Time:
                   </span>
-                  <h3 className="font-bold text-gray-200 ">
+                  <h3 className="font-semibold text-sm text-gray-200 ">
                     {scheduledDeparture.toLocaleString()}
                   </h3>
                 </div>
-                <div className="flex">
-                  <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
+                <div className="flex  border border-b-2 border-gray-600 border-x-0 border-t-0 py-2">
+                  <span className="font-semibold text-base tracking-tight mr-10 text-blue-400">
                     Expected Arrival Time:
                   </span>
-                  <h3 className=" font-bold text-gray-200">
+                  <h3 className=" font-semibold text-sm text-gray-200">
                     {scheduledArrival.toLocaleString()}
                   </h3>
                 </div>
