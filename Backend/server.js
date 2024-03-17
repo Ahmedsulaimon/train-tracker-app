@@ -32,7 +32,7 @@ async function fetchDataFromAPI(tiploc) {
   today = yyyy + '-' + mm + '-' + dd;
   // LEEDS,YORK,HULL,KNGX,NWCSTLE,SKPT,DONC
   //AIzaSyDUQBtCGL6_KtW0FJrCtCmfr_P7R0C-7T0
-  var TIPLOCS = "DONC"
+
 
   var date = today.toString()
   console.log(today.toString());
@@ -49,14 +49,14 @@ async function fetchDataFromAPI(tiploc) {
     const data = await response.json();
 
     //const initialData = JSON.stringify(data)
-    console.log(data);
+    // console.log(data);
     const ids = [];
 
     // Keep track of encountered pairs of activationId and scheduleId
     const encounteredPairs = {};
 
     data.forEach((item) => {
-      const { originLocation, destinationLocation, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name, cancelled } = item;
+      const { originLocation, destinationLocation, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name, cancelled, lastReportedDelay, lastReportedType } = item;
       const key = `${activationId}-${scheduleId}`;
 
       if (encounteredPairs[key]) {
@@ -67,12 +67,12 @@ async function fetchDataFromAPI(tiploc) {
         }
       } else {
         // If pair not encountered yet, add new object to ids array
-        ids.push({ originLocation, destinationLocation, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name: [toc_Name], cancelled });
+        ids.push({ originLocation, destinationLocation, scheduledDeparture, scheduledArrival, activationId, scheduleId, trainId, toc_Name: [toc_Name], cancelled, lastReportedDelay, lastReportedType });
         encounteredPairs[key] = true;
       }
     });
 
-    // console.log(ids)
+    console.log(ids)
     const promises = ids.map(async (item) => {
       const movement = await fetch(
         `https://traindata-stag-api.railsmart.io/api/ifmtrains/movement/${item.activationId}/${item.scheduleId}`,
@@ -89,7 +89,7 @@ async function fetchDataFromAPI(tiploc) {
     });
 
     const allTrainMovement = await Promise.all(promises);
-    //console.log(allTrainMovement);
+    // console.log(allTrainMovement);
 
     const processedTrainMovement = [];
 
@@ -163,7 +163,7 @@ app.get("/", (req, res) => {
   res.json({ mssg: "welcome to the app" });
 });
 
-let tiploc = "DONC";
+let tiploc;
 
 // Function to periodically fetch data from the API and emit updates
 const fetchDataAndUpdate = async () => {
@@ -180,10 +180,10 @@ const fetchDataAndUpdate = async () => {
 // Initial call to fetchDataAndUpdate
 fetchDataAndUpdate();
 
-// Set up the setInterval to periodically call fetchDataAndUpdate
+//Set up the setInterval to periodically call fetchDataAndUpdate
 setInterval(async () => {
   await fetchDataAndUpdate()
-}, 60000); // 5000 milliseconds = 5 seconds
+}, 120000); // 5000 milliseconds = 5 seconds
 
 // Listen for tiplocSelected event
 io.on("connection", (socket) => {

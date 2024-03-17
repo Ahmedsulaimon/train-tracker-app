@@ -22,7 +22,7 @@ function Home() {
   const [selectedJourney, setSelectedJourney] = useState(0);
   const [isSidebarLeftOpen, setIsSidebarLeftOpen] = useState(false);
   const [isSidebarRightOpen, setIsSidebarRightOpen] = useState(false);
-  const [trainMovements, setTrainMovement] = useState(null);
+
   const [location, setLocation] = useState({ lat: 53.79648, lng: -1.54785 });
   console.log(error);
   console.log(data);
@@ -77,11 +77,13 @@ function Home() {
 
   return (
     <>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       <SidebarLeft
         isOpen={isSidebarLeftOpen}
         closeSidebar={closeSidebar}
         data={data}
         handleJourneySelect={handleJourneySelect}
+        selectedJourney={selectedJourney}
       />
       {data &&
         data.allTrainSchedule &&
@@ -143,22 +145,23 @@ function Home() {
 
                     if (!trainInfo) return null;
 
-                    const scheduledDeparture = new Date(
-                      trainInfo.scheduledDeparture
-                    );
-                    const scheduledArrival = new Date(
-                      trainInfo.scheduledArrival
-                    );
+                    // const scheduledDeparture = new Date(
+                    //   trainInfo.scheduledDeparture
+                    // );
+                    // const scheduledArrival = new Date(
+                    //   trainInfo.scheduledArrival
+                    // );
 
-                    let color = "blue";
+                    let color = "gray";
 
                     if (trainInfo.cancelled) {
                       color = "red";
-                    } else if (currentDateTime < scheduledDeparture) {
-                      return null;
-                    } else if (currentDateTime > scheduledArrival) {
-                      color = "green";
                     }
+                    // else if (currentDateTime < scheduledDeparture) {
+                    //   return null;
+                    // } else if (currentDateTime > scheduledArrival) {
+                    //   color = "green";
+                    // }
 
                     const validMovements = trainMovements.filter(
                       (movement) => movement.latLong
@@ -191,6 +194,67 @@ function Home() {
                       </React.Fragment>
                     );
                   })}
+                {data &&
+                  data.processedTrainMovement &&
+                  data.processedTrainMovement.map(
+                    (processedMovement, index) => {
+                      const trainInfo = data.ids[index];
+
+                      if (!trainInfo) return null;
+                      const scheduledDeparture = new Date(
+                        trainInfo.scheduledDeparture
+                      );
+                      const scheduledArrival = new Date(
+                        trainInfo.scheduledArrival
+                      );
+                      const validMovements = processedMovement.filter(
+                        (movement) => movement.latLong
+                      );
+                      let color = "blue";
+
+                      if (trainInfo.cancelled) {
+                        color = "red";
+                      }
+                      if (validMovements.length > 0 && trainInfo.cancelled) {
+                        color = "blue";
+                      }
+                      // else if (currentDateTime < scheduledDeparture) {
+                      //   return null;
+                      // }
+                      else if (trainInfo.lastReportedType === "TERMINATED") {
+                        color = "green";
+                      }
+
+                      const lastProcessedMovement =
+                        validMovements.length > 0
+                          ? validMovements[validMovements.length - 1]
+                          : null;
+                      return (
+                        <React.Fragment key={`processed-${index}`}>
+                          {selectedJourney === index && (
+                            <Polyline
+                              pathOptions={{ color }}
+                              positions={validMovements.map((movement) => [
+                                movement.latLong.latitude,
+                                movement.latLong.longitude,
+                              ])}
+                            />
+                          )}
+                          {selectedJourney === index &&
+                            lastProcessedMovement && (
+                              <Marker
+                                position={[
+                                  lastProcessedMovement.latLong.latitude,
+                                  lastProcessedMovement.latLong.longitude,
+                                ]}
+                              >
+                                <Popup>{lastProcessedMovement.location}</Popup>
+                              </Marker>
+                            )}
+                        </React.Fragment>
+                      );
+                    }
+                  )}
                 <LocationMarker lat={location.lat} lng={location.lng} />
               </MapContainer>
             </div>
