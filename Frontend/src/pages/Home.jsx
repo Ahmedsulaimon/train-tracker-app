@@ -128,7 +128,7 @@ function Home() {
             <div style={mapContainerStyle}>
               <MapContainer
                 center={location}
-                zoom={8}
+                zoom={9}
                 scrollWheelZoom={true}
                 style={{ width: "100%", height: "100%" }}
               >
