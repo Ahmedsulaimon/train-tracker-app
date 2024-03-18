@@ -37,7 +37,7 @@ function Home() {
   });
   const trainMarker = new Icon({
     iconUrl: "../../Images/train-icon.png",
-    iconSize: [40, 40],
+    iconSize: [35, 35],
   });
 
   useEffect(() => {
@@ -206,14 +206,18 @@ function Home() {
                                   destinationStation.latLong.latitude,
                                   destinationStation.latLong.longitude,
                                 ]}
-                              ></Marker>
+                              >
+                                <Popup>{destinationStation.location}</Popup>
+                              </Marker>
                               <Marker
                                 icon={originMarker}
                                 position={[
                                   originStation.latLong.latitude,
                                   originStation.latLong.longitude,
                                 ]}
-                              ></Marker>
+                              >
+                                <Popup>{originStation.location}</Popup>
+                              </Marker>
                             </>
                           )}
                       </React.Fragment>

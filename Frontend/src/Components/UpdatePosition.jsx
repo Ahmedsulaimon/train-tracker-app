@@ -23,8 +23,6 @@ export default function LocationMarker({ lat, lng }) {
   }, [lat, lng]);
 
   return position === null ? null : (
-    <Marker position={position} icon={locationUpdateMarker}>
-      <Popup>You are here</Popup>
-    </Marker>
+    <Marker position={position} icon={locationUpdateMarker}></Marker>
   );
 }
