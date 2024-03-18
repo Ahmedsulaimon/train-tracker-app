@@ -27,8 +27,7 @@ const Footer = () => {
           <FaHockeyPuck color='green' className='w-6 h-6' />
             <span className="text-white ml-2">Early</span>
           </div>
-        </div>
-        
+        </div>    
       </div>
     </footer>
   );

@@ -41,13 +41,17 @@ const SearchBar = ({ data, moveToLocation, openSideBars }) => {
   }, [selectedTiploc]);
   return (
     <div>
+      <form>
       <input
         type="text"
         placeholder="Search by location or TIPLOC..."
-        className="w-full p-3 rounded-md border-2 border-r-white rounded-r-none border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none"
+        className="w-full p-3 border-2 border-r-white rounded-lg border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+</form>
+<div className="relative overflow-y-auto z-50 rounded-md h-4 px-56 text-center justify-center">
+        <div className="fixed mr-80 bg-white align-middle py-6 px-40">
       <div>
         {filteredResults.map((result) => (
           <button
@@ -66,6 +70,8 @@ const SearchBar = ({ data, moveToLocation, openSideBars }) => {
       </div>
       {/* {selectedTiploc && <p>Selected TIPLOC: {selectedTiploc}</p>} */}
     </div>
+  </div>
+</div>
   );
 };
 

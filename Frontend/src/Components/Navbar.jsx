@@ -22,14 +22,8 @@ const Navbar = ({ toggleSidebarLeft, toggleSidebarRight }) => {
             <a href="/App" className="text-white">3Squared</a>
           </div>
 
-          <div className="flex rounded-md max-w-[500px] w-full justify-center">
+          <div className="flex rounded-md justify-center">
           <SearchBar data={TiplocData} />
-  
-            <button className="inline-flex items-center gap-2 bg-gray-700 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
-              <span>
-                <FaSearch />
-              </span>
-            </button>
           </div>
 
           <div className="flex">

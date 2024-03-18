@@ -111,11 +111,11 @@ function Home() {
         toggleSidebarLeft={toggleSidebarLeft}
         toggleSidebarRight={toggleSidebarRight}
       />
-      <SearchBar
+      {/* <SearchBar
         data={TiplocData}
         moveToLocation={moveToLocation}
         openSideBars={openBothSideBars}
-      />
+      /> */}
       <div className="text-center">
         <div
           style={{
