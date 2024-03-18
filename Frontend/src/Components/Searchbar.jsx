@@ -20,7 +20,7 @@ const SearchBar = ({ data, moveToLocation, openSideBars }) => {
     );
 
     setFilteredResults(results);
-  }, 3000);
+  }, 300);
 
   useEffect(() => {
     handleSearch(searchQuery);
@@ -60,7 +60,11 @@ const SearchBar = ({ data, moveToLocation, openSideBars }) => {
               setSelectedTiploc(result.Tiploc);
               setSearchQuery("");
               moveToLocation(result.Latitude, result.Longitude);
-              openSideBars(true);
+              //make sidebars open after 2seconds
+              // Open sidebars after 2 seconds
+              setTimeout(() => {
+                openSideBars(true);
+              }, 2000);
             }}
             className=" mr-3"
           >

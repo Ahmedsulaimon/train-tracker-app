@@ -16,6 +16,7 @@ import LocationName from "../Components/getUserLocation/getCoordinate";
 import LocationMarker from "../Components/UpdatePosition";
 import SearchBar from "../Components/Searchbar";
 import TiplocData from "../data/tiplocs.json";
+import { Icon } from "leaflet";
 function Home() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -26,6 +27,18 @@ function Home() {
   const [location, setLocation] = useState({ lat: 53.79648, lng: -1.54785 });
   console.log(error);
   console.log(data);
+  const destinationMarker = new Icon({
+    iconUrl: "../../Images/black dot.png",
+    iconSize: [12, 12],
+  });
+  const originMarker = new Icon({
+    iconUrl: "../../Images/black dot 2.png",
+    iconSize: [25, 25],
+  });
+  const trainMarker = new Icon({
+    iconUrl: "../../Images/train-icon.png",
+    iconSize: [40, 40],
+  });
 
   useEffect(() => {
     const socket = socketIOClient("http://localhost:3001");
@@ -128,7 +141,7 @@ function Home() {
             <div style={mapContainerStyle}>
               <MapContainer
                 center={location}
-                zoom={8}
+                zoom={9}
                 scrollWheelZoom={true}
                 style={{ width: "100%", height: "100%" }}
               >
@@ -167,7 +180,9 @@ function Home() {
                       (movement) => movement.latLong
                     );
 
-                    const lastMovement =
+                    const originStation = validMovements[0];
+
+                    const destinationStation =
                       validMovements[validMovements.length - 1];
 
                     return (
@@ -181,16 +196,26 @@ function Home() {
                             ])}
                           />
                         )}
-                        {selectedJourney === index && lastMovement && (
-                          <>
-                            <Marker
-                              position={[
-                                lastMovement.latLong.latitude,
-                                lastMovement.latLong.longitude,
-                              ]}
-                            ></Marker>
-                          </>
-                        )}
+                        {selectedJourney === index &&
+                          originStation &&
+                          destinationStation && (
+                            <>
+                              <Marker
+                                icon={destinationMarker}
+                                position={[
+                                  destinationStation.latLong.latitude,
+                                  destinationStation.latLong.longitude,
+                                ]}
+                              ></Marker>
+                              <Marker
+                                icon={originMarker}
+                                position={[
+                                  originStation.latLong.latitude,
+                                  originStation.latLong.longitude,
+                                ]}
+                              ></Marker>
+                            </>
+                          )}
                       </React.Fragment>
                     );
                   })}
@@ -247,6 +272,7 @@ function Home() {
                                   lastProcessedMovement.latLong.latitude,
                                   lastProcessedMovement.latLong.longitude,
                                 ]}
+                                icon={trainMarker}
                               >
                                 <Popup>{lastProcessedMovement.location}</Popup>
                               </Marker>

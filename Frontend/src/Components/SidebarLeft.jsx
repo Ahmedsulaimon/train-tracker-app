@@ -48,7 +48,7 @@ const SidebarLeft = ({
                     status = "Active";
                   }
 
-                  // Check if the train is cancelled or terminated
+                  // Check if the train is cancelled, not started or terminated
                   if (trainInfo.cancelled) {
                     status = "Cancelled";
                   }
@@ -66,6 +66,23 @@ const SidebarLeft = ({
                     ) {
                       status = "Not Started";
                     }
+                  }
+
+                  // Set status color based on status
+                  let statusColor = "";
+                  switch (status) {
+                    case "Active":
+                      statusColor = "text-blue-400";
+                      break;
+                    case "Cancelled":
+                      statusColor = "text-red-400";
+                      break;
+                    case "Terminated":
+                      statusColor = "text-green-300";
+                      break;
+                    default:
+                      statusColor = "text-gray-400"; // Not Started remains white
+                      break;
                   }
 
                   // Determine if the train is delayed, early, or on time
@@ -99,12 +116,14 @@ const SidebarLeft = ({
                       }
                     >
                       {delayTag && (
-                        <p className="mr-1 text-end text-sm font-semibold">
-                          {delayTag}
+                        <p className="mr-1 text-end text-sm font-semibold text-gray-400">
+                          {trainInfo.lastReportedDelay} min(s) ({delayTag})
                         </p>
                       )}
-                      {trainInfo.originLocation} to{" "}
-                      {trainInfo.destinationLocation} - {status}
+                      {trainInfo.originLocation}{" "}
+                      <span className=" text-gray-400">to</span>{" "}
+                      {trainInfo.destinationLocation} -{" "}
+                      <span className={statusColor}>{status}</span>
                     </button>
                   );
                 })
