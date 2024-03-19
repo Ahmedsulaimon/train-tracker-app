@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { debounce } from "lodash";
 import socketIOClient from "socket.io-client";
 
-const SearchBar = ({ data, moveToLocation, openSideBars }) => {
+const SearchBar = ({
+  data,
+  moveToLocation,
+  openSideBars,
+  resetSelectedJourneyIndex,
+  resetData,
+}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const [selectedTiploc, setSelectedTiploc] = useState("");
@@ -64,6 +70,8 @@ const SearchBar = ({ data, moveToLocation, openSideBars }) => {
                 setTimeout(() => {
                   openSideBars(true);
                 }, 2000);
+                resetSelectedJourneyIndex(0);
+                resetData(null);
               }}
               className="block w-full px-4 py-2 text-left hover:bg-gray-100"
             >
@@ -77,4 +85,3 @@ const SearchBar = ({ data, moveToLocation, openSideBars }) => {
 };
 
 export default SearchBar;
-

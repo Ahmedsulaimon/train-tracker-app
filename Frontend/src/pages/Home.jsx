@@ -37,7 +37,7 @@ function Home() {
   });
   const trainMarker = new Icon({
     iconUrl: "../../Images/train-icon.png",
-    iconSize: [35, 35],
+    iconSize: [30, 30],
   });
 
   useEffect(() => {
@@ -78,6 +78,12 @@ function Home() {
   const openBothSideBars = (open) => {
     setIsSidebarLeftOpen(open);
     setIsSidebarRightOpen(open);
+  };
+  const resetSelectedJourneyIndex = (reset) => {
+    setSelectedJourney(reset);
+  };
+  const resetData = (reset) => {
+    setData(reset);
   };
 
   const currentDateTime = new Date();
@@ -123,6 +129,10 @@ function Home() {
       <Navbar
         toggleSidebarLeft={toggleSidebarLeft}
         toggleSidebarRight={toggleSidebarRight}
+        moveToLocation={moveToLocation}
+        openSideBars={openBothSideBars}
+        resetSelectedJourneyIndex={resetSelectedJourneyIndex}
+        resetData={resetData}
       />
       {/* <SearchBar
         data={TiplocData}

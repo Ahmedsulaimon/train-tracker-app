@@ -128,14 +128,14 @@ const SidebarLeft = ({
                   );
                 })
               ) : data === null ? (
-                <p>Loading...</p>
+                <p className="text-lg text-center pt-60">Loading...</p>
               ) : (
                 <p className="text-lg text-gray-400 font-bold text-center pt-40 px-4">
                   No Freight Train Operating In This Location
                 </p>
               )
             ) : (
-              <p>Loading...</p>
+              <p className="text-lg text-center pt-60 font-bold">Loading...</p>
             )}
           </div>
         </div>
