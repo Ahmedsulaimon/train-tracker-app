@@ -53,7 +53,7 @@ const SearchBar = ({
         <input
           type="text"
           placeholder="Search by location or TIPLOC..."
-          className="w-80 p-3 mr-16 border-2 border-r-white rounded-lg border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none"
+          className="w-80 p-3 mr-20 border-2 border-r-white rounded-lg border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500 dark:text-gray-300 dark:border-none"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
