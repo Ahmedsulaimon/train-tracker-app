@@ -1,14 +1,11 @@
 import React from "react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
+import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { FaTrainSubway } from "react-icons/fa6";
 
 function Timeline({ trainMovements }) {
   return (
-    <div className=" touch-pan-y  experience leading-8">
+    <div className="touch-pan-y experience leading-8">
       <VerticalTimeline lineColor="#000">
         {trainMovements.map((movement, movementIndex) => {
           // Extracting keys that are not metadata
@@ -28,20 +25,6 @@ function Timeline({ trainMovements }) {
               className="vertical-timeline-element--education"
               iconStyle={{ background: "#000", color: "#fff" }}
               icon={<FaTrainSubway />}
-              date={
-                <div className="flex flex-col">
-                  {movementDetails.map((detail, index) => (
-                    <div key={index} className="px-7">
-                      <p className="font-semibold text-sm text-blue-500">
-                        {detail.type.charAt(0).toUpperCase() +
-                          detail.type.slice(1)}{" "}
-                        Time:
-                      </p>
-                      <span>{detail.time || "--"}</span>
-                    </div>
-                  ))}
-                </div>
-              }
             >
               <div className="px-2">
                 <h3
@@ -52,6 +35,18 @@ function Timeline({ trainMovements }) {
                 >
                   {movement.location}
                 </h3>
+                <div className="px-7 mt-1">
+                  {movementDetails.map((detail, index) => (
+                    <div key={index}>
+                      <p className="font-semibold text-sm text-blue-500">
+                        {detail.type.charAt(0).toUpperCase() +
+                          detail.type.slice(1)}{" "}
+                        Time:
+                      </p>
+                      <span>{detail.time || "--"}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </VerticalTimelineElement>
           );
@@ -62,3 +57,4 @@ function Timeline({ trainMovements }) {
 }
 
 export default Timeline;
+
