@@ -33,6 +33,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
                   <h3
                     className=" mr-1 font-semibold text-sm text-gray-200 "
                     key={index}
+                    style={{ display: 'flex', alignItems: 'center' }}
                   >
                     {toc}.
                   </h3>
@@ -42,7 +43,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
                 <span className="font-semibold text-base tracking-tight mr-14 text-blue-200">
                   Train Journey:
                 </span>
-                <h3 className="font-semibold text-sm text-gray-200">
+                <h3 className="font-semibold text-sm text-gray-200" style={{ display: 'flex', alignItems: 'center' }}>
                   {trainInfo.originLocation}
                   <span className="font-semibold text-sm tracking-tight mx-3 text-gray-200">
                     to
@@ -56,7 +57,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
                     {" "}
                     Expected Departure Time:
                   </span>
-                  <h3 className="font-semibold text-sm text-gray-200 ">
+                  <h3 className="font-semibold text-sm text-gray-200" style={{ display: 'flex', alignItems: 'center' }}>
                     {scheduledDeparture.toLocaleString()}
                   </h3>
                 </div>
@@ -64,7 +65,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
                   <span className="font-semibold text-base tracking-tight mr-10 text-blue-200">
                     Expected Arrival Time:
                   </span>
-                  <h3 className=" font-semibold text-sm text-gray-200">
+                  <h3 className=" font-semibold text-sm text-gray-200" style={{ display: 'flex', alignItems: 'center' }}>
                     {scheduledArrival.toLocaleString()}
                   </h3>
                 </div>
