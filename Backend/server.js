@@ -183,7 +183,7 @@ fetchDataAndUpdate();
 //Set up the setInterval to periodically call fetchDataAndUpdate
 setInterval(async () => {
   await fetchDataAndUpdate()
-}, 120000); // 5000 milliseconds = 5 seconds
+}, 60000); // 5000 milliseconds = 5 seconds
 
 // Listen for tiplocSelected event
 io.on("connection", (socket) => {

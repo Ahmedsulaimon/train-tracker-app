@@ -37,7 +37,7 @@ function Timeline({ trainMovements }) {
                           detail.type.slice(1)}{" "}
                         Time:
                       </p>
-                      <span>{detail.time || "--"}</span>
+                      <span>{detail.time.match(/.{1,2}/g).join(":")}</span>
                     </div>
                   ))}
                 </div>

@@ -15,6 +15,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
         <button
           onClick={closeSidebar}
+          aria-label="right sidebar"
           className="text-gray-500 focus:outline-none focus:text-gray-600"
         >
           <IoIosClose className="w-6 h-6" />
@@ -25,7 +26,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
           <div className="flex  flex-wrap bg-gray-700 p-2  leading-6">
             <div className=" text-white mt-1">
               <div className=" flex border border-b-2 border-gray-600 border-x-0 border-t-0 pb-2">
-                <span className="font-semibold text-base tracking-tight mr-1 text-blue-400">
+                <span className="font-semibold text-base tracking-tight mr-1 text-blue-200">
                   Operating Company (s):
                 </span>
                 {trainInfo.toc_Name.map((toc, index) => (
@@ -38,12 +39,12 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
                 ))}
               </div>
               <div className=" flex  border border-b-2 border-gray-600 border-x-0 border-t-0 py-2">
-                <span className="font-semibold text-base tracking-tight mr-14 text-blue-400">
+                <span className="font-semibold text-base tracking-tight mr-14 text-blue-200">
                   Train Journey:
                 </span>
                 <h3 className="font-semibold text-sm text-gray-200">
                   {trainInfo.originLocation}
-                  <span className="font-semibold text-xs tracking-tight mx-3 text-gray-500">
+                  <span className="font-semibold text-sm tracking-tight mx-3 text-gray-200">
                     to
                   </span>
                   {trainInfo.destinationLocation}
@@ -51,7 +52,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
               </div>
               <div>
                 <div className="flex  border border-b-2 border-gray-600 border-x-0 border-t-0 py-2">
-                  <span className="font-semibold text-base tracking-tight mr-3 text-blue-400">
+                  <span className="font-semibold text-base tracking-tight mr-3 text-blue-200">
                     {" "}
                     Expected Departure Time:
                   </span>
@@ -60,7 +61,7 @@ const SidebarRight = ({ isOpen, closeSidebar, trainMovements, trainInfo }) => {
                   </h3>
                 </div>
                 <div className="flex  border border-b-2 border-gray-600 border-x-0 border-t-0 py-2">
-                  <span className="font-semibold text-base tracking-tight mr-10 text-blue-400">
+                  <span className="font-semibold text-base tracking-tight mr-10 text-blue-200">
                     Expected Arrival Time:
                   </span>
                   <h3 className=" font-semibold text-sm text-gray-200">

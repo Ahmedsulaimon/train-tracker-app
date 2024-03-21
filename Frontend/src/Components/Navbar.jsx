@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaAngleDoubleLeft } from "react-icons/fa";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import TiplocData from "../data/tiplocs.json";
 import SearchBar from "../Components/Searchbar";
+import Countdown from "./CountDown";
 
 const Navbar = ({
   toggleSidebarLeft,
@@ -20,6 +21,7 @@ const Navbar = ({
             <button
               onClick={toggleSidebarLeft}
               className="text-gray-500 focus:outline-none focus:text-gray-600"
+              aria-label="left sidebar"
             >
               <FaAngleDoubleLeft color="white" className="w-6 h-6" />
             </button>
@@ -29,13 +31,14 @@ const Navbar = ({
               className="mr-2 ml-8"
               width={50}
               height={50}
+              alt="3Squared Logo"
             ></img>
             <a href="/App" className="text-white">
               3Squared
             </a>
           </div>
 
-          <div className="flex rounded-md justify-center">
+          <div className="flex rounded-md mt-2">
             <SearchBar
               data={TiplocData}
               moveToLocation={moveToLocation}
@@ -43,12 +46,16 @@ const Navbar = ({
               resetSelectedJourneyIndex={resetSelectedJourneyIndex}
               resetData={resetData}
             />
+            <div className=" flex items-center">
+              <Countdown className="" />
+            </div>
           </div>
 
-          <div className="flex">
+          <div className="flex ">
             <button
               onClick={toggleSidebarRight}
               className="text-gray-500 focus:outline-none focus:text-gray-600 ml-2"
+              aria-label="right sidebar"
             >
               <FaAngleDoubleRight color="white" className="w-6 h-6" />
             </button>

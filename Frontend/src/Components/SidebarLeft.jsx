@@ -19,6 +19,7 @@ const SidebarLeft = ({
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
         <button
           onClick={closeSidebar}
+          aria-label="left sidebar"
           className="text-gray-500 focus:outline-none focus:text-gray-600"
         >
           <IoIosClose className="w-6 h-6" />
@@ -108,6 +109,7 @@ const SidebarLeft = ({
                   return (
                     <button
                       key={index}
+                      aria-label="train journey"
                       onClick={() => handleJourneySelect(index)}
                       className={
                         selectedJourney === index

@@ -11,11 +11,9 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import SidebarLeft from "../Components/SidebarLeft";
 import SidebarRight from "../Components/SidebarRight";
-import Timeline from "../Components/Timeline";
-import LocationName from "../Components/getUserLocation/getCoordinate";
+
 import LocationMarker from "../Components/UpdatePosition";
-import SearchBar from "../Components/Searchbar";
-import TiplocData from "../data/tiplocs.json";
+
 import { Icon } from "leaflet";
 function Home() {
   const [data, setData] = useState(null);
@@ -134,11 +132,7 @@ function Home() {
         resetSelectedJourneyIndex={resetSelectedJourneyIndex}
         resetData={resetData}
       />
-      {/* <SearchBar
-        data={TiplocData}
-        moveToLocation={moveToLocation}
-        openSideBars={openBothSideBars}
-      /> */}
+
       <div className="text-center">
         <div
           style={{
@@ -168,23 +162,11 @@ function Home() {
 
                     if (!trainInfo) return null;
 
-                    // const scheduledDeparture = new Date(
-                    //   trainInfo.scheduledDeparture
-                    // );
-                    // const scheduledArrival = new Date(
-                    //   trainInfo.scheduledArrival
-                    // );
-
                     let color = "gray";
 
                     if (trainInfo.cancelled) {
                       color = "red";
                     }
-                    // else if (currentDateTime < scheduledDeparture) {
-                    //   return null;
-                    // } else if (currentDateTime > scheduledArrival) {
-                    //   color = "green";
-                    // }
 
                     const validMovements = trainMovements.filter(
                       (movement) => movement.latLong
@@ -240,12 +222,7 @@ function Home() {
                       const trainInfo = data.ids[index];
 
                       if (!trainInfo) return null;
-                      const scheduledDeparture = new Date(
-                        trainInfo.scheduledDeparture
-                      );
-                      const scheduledArrival = new Date(
-                        trainInfo.scheduledArrival
-                      );
+
                       const validMovements = processedMovement.filter(
                         (movement) => movement.latLong
                       );
@@ -256,11 +233,7 @@ function Home() {
                       }
                       if (validMovements.length > 0 && trainInfo.cancelled) {
                         color = "blue";
-                      }
-                      // else if (currentDateTime < scheduledDeparture) {
-                      //   return null;
-                      // }
-                      else if (trainInfo.lastReportedType === "TERMINATED") {
+                      } else if (trainInfo.lastReportedType === "TERMINATED") {
                         color = "green";
                       }
 

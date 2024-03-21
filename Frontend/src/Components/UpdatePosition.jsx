@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Marker, Popup, useMap } from "react-leaflet";
+import { Marker, useMap } from "react-leaflet";
 import { Icon } from "leaflet";
 export default function LocationMarker({ lat, lng }) {
   const [position, setPosition] = useState(lat && lng ? { lat, lng } : null);

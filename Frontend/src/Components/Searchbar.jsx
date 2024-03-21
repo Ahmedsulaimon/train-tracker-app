@@ -63,6 +63,7 @@ const SearchBar = ({
           {filteredResults.map((result) => (
             <button
               key={result.Tiploc}
+              aria-label="searched location"
               onClick={() => {
                 setSelectedTiploc(result.Tiploc);
                 setSearchQuery("");
