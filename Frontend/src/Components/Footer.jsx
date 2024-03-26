@@ -25,7 +25,7 @@ const Footer = () => {
           </span>
         </button>
         {dropupVisible && (
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-[600px] h-[300px] overflow-y-auto py-2 bg-white text-gray-800 shadow-lg rounded-t-lg">
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-[450px] h-[300px] overflow-y-auto py-2 bg-white text-gray-800 shadow-lg rounded-t-xl">
             <button
               className=" float-end mx-3 bg-gray-200 p-2 text-gray-700 rounded-full"
               onClick={() => setDropupVisible(false)}
