@@ -3,6 +3,7 @@
  This application was developed for a client (3Squared)
 
  This application allows train operators keep track of different freight trains operating in different location.
+ 
 
 # Setup guide
 
@@ -31,3 +32,5 @@
  next, type "npm i" and press enter
 
  Finally, add this link to your browser to display the application (http://localhost:5173/)
+
+ Last Update: 26/03/2024
