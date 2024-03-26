@@ -20,11 +20,11 @@
 
 # open your terminal
 
-# type "cd frontend" and press enter
+ type "cd frontend" and press enter
 
-# next, type "npm i" and press enter
+ next, type "npm i" and press enter
 
-# open another powershell in your terminal
+ open another powershell in your terminal
 
  type "cd backend" and press enter
 
