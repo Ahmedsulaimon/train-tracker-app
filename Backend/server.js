@@ -30,7 +30,7 @@ async function fetchDataFromAPI(tiploc) {
   var yyyy = today.getFullYear();
 
   today = yyyy + '-' + mm + '-' + dd;
-  // LEEDS,YORK,HULL,KNGX,NWCSTLE,SKPT,DONC
+
   //AIzaSyDUQBtCGL6_KtW0FJrCtCmfr_P7R0C-7T0
 
 
@@ -47,9 +47,6 @@ async function fetchDataFromAPI(tiploc) {
       }
     );
     const data = await response.json();
-
-    //const initialData = JSON.stringify(data)
-    // console.log(data);
     const ids = [];
 
     // Keep track of encountered pairs of activationId and scheduleId
@@ -84,12 +81,12 @@ async function fetchDataFromAPI(tiploc) {
         }
       );
       const trainMovement = await movement.json();
-      // var trainMovementData = JSON.stringify(trainMovement)
+
       return trainMovement;
     });
 
     const allTrainMovement = await Promise.all(promises);
-    // console.log(allTrainMovement);
+
 
     const processedTrainMovement = [];
 
@@ -137,12 +134,12 @@ async function fetchDataFromAPI(tiploc) {
         }
       );
       const trainSchedule = await schedule.json();
-      // var trainScheduleData = JSON.stringify(trainSchedule)
+
       return trainSchedule;
     });
 
     const allTrainSchedule = await Promise.all(promisesSchedule);
-    // console.log(allTrainSchedule);
+
 
 
     return { processedTrainMovement, ids, allTrainMovement, allTrainSchedule };
@@ -153,15 +150,6 @@ async function fetchDataFromAPI(tiploc) {
   }
 }
 
-//middleware
-app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-});
-//routes
-app.get("/", (req, res) => {
-  res.json({ mssg: "welcome to the app" });
-});
 
 let tiploc;
 
@@ -183,7 +171,7 @@ fetchDataAndUpdate();
 //Set up the setInterval to periodically call fetchDataAndUpdate
 setInterval(async () => {
   await fetchDataAndUpdate()
-}, 60000); // 5000 milliseconds = 5 seconds
+}, 60000); // 60000 milliseconds = 60 seconds
 
 // Listen for tiplocSelected event
 io.on("connection", (socket) => {

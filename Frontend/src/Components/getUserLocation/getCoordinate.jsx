@@ -4,9 +4,7 @@ import { useState } from "react";
 const LocationName = () => {
   const [Latitude, SetLatitude] = useState(null);
   const [Longitude, SetLongitude] = useState(null);
-  // Example latitude and longitude
-  //   const latitude = 40.7128;
-  //   const longitude = -74.006;
+
   if ("geolocation" in navigator) {
     // Geolocation is supported
     console.log("Geolocation is supported");
@@ -17,8 +15,6 @@ const LocationName = () => {
         SetLongitude(longitude);
         console.log("Latitude:", latitude);
         console.log("Longitude:", longitude);
-
-        // Use the obtained coordinates with Leaflet.js to show the user's location on the map
       },
       (error) => {
         switch (error.code) {

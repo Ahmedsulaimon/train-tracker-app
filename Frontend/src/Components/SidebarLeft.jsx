@@ -39,7 +39,7 @@ const SidebarLeft = ({
                   const scheduledDeparture = new Date(
                     trainInfo.scheduledDeparture
                   );
-                  const scheduledArrival = new Date(trainInfo.scheduledArrival);
+
                   let status = "Active";
                   if (
                     index === processedMovement &&
@@ -73,13 +73,13 @@ const SidebarLeft = ({
                   let statusColor = "";
                   switch (status) {
                     case "Active":
-                      statusColor = "text-blue-400";
+                      statusColor = "text-green-300";
                       break;
                     case "Cancelled":
                       statusColor = "text-red-400";
                       break;
                     case "Terminated":
-                      statusColor = "text-green-300";
+                      statusColor = "text-blue-400";
                       break;
                     default:
                       statusColor = "text-gray-400"; // Not Started remains white

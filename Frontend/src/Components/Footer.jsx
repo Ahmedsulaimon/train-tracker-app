@@ -1,136 +1,105 @@
 import React, { useState } from "react";
-import { FaTimes } from "react-icons/fa";
-import { GoDash } from "react-icons/go";
+import { FaAngleUp, FaTimes } from "react-icons/fa";
 import { FiKey } from "react-icons/fi";
+import { GoDash } from "react-icons/go";
 
 const Footer = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [dropupVisible, setDropupVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
+  const toggleDropup = () => {
+    setDropupVisible(!dropupVisible);
   };
 
   return (
-    <footer className="bg-gray-800 w-screen fixed bottom-0 h-20">
-      <div className="flex justify-between items-center px-8 h-full">
-        <div className="flex justify-center items-center flex-grow">
-          <button
-            className="text-white cursor-pointer font-semibold text-lg flex"
-            style={{
-              position: "absolute",
-              left: "50%",
-              transform: "translateX(-50%)",
-            }}
-            onClick={toggleModal}
-          >
-            <FiKey /> Journey Legend
-          </button>
-        </div>
-        <p className="text-white">© 2024 3Squared. All rights reserved.</p>
-      </div>
-
-      {modalVisible && (
-        <div
-          id="default-modal"
-          className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex justify-center items-center"
+    <footer className="bg-gray-800 text-gray-100 flex justify-between items-center px-8  w-screen fixed bottom-0 h-20">
+      <p className="">© 2024 3Squared. All rights reserved.</p>
+      <div className="relative mx-auto">
+        <button
+          className="flex items-center space-x-2 focus:outline-none"
+          onClick={toggleDropup}
         >
-          <div className="relative bg-white rounded-lg shadow-lg max-w-xl w-full">
-            <div className="absolute top-0 right-0 p-4">
-              <button
-                type="button"
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
-                onClick={toggleModal}
-              >
-                <FaTimes className="w-3 h-3" />
-                <span className="sr-only">Close modal</span>
-              </button>
-            </div>
-            <div className="p-4 space-y-4 max-h-80 overflow-y-auto">
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <GoDash color="grey" className="w-10 h-10" />
-                <span className="text-gray-800 text-lg ml-2">Train Route</span>
+          <span className=" flex font-semibold text-lg">
+            {" "}
+            <FiKey />
+            Journey Legend
+          </span>
+          <FaAngleUp className={`transform ${dropupVisible && "rotate-180"}`} />
+        </button>
+        {dropupVisible && (
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-[600px] h-[300px] overflow-y-auto py-2 bg-white text-gray-800 shadow-lg rounded-t-lg">
+            <button
+              className=" float-end mx-3 bg-gray-200 p-2 text-gray-700 rounded-full"
+              onClick={() => setDropupVisible(false)}
+            >
+              {" "}
+              <FaTimes className="w-3 h-3" />
+            </button>
+            <div className="p-4 space-y-4 ">
+              <div className="flex items-center">
+                <GoDash className="w-10 h-10 text-gray-800" />
+                <span className="text-gray-700 text-lg ml-2 font-semibold">
+                  Train Route
+                </span>
               </div>
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <GoDash color="blue" className="w-10 h-10" />
-                <span className="text-gray-800 text-lg ml-2">Active Train</span>
+              <div className="flex">
+                <GoDash className="w-10 h-10 text-green-600" />
+                <span className="text-gray-800 text-lg ml-2 font-semibold">
+                  Active Train
+                </span>
               </div>
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <GoDash color="red" className="w-10 h-10" />
-                <span className="text-gray-800 text-lg ml-2">
+              <div className="flex">
+                <GoDash className="w-10 h-10 text-red-600" />
+                <span className="text-gray-800 text-lg ml-2 font-semibold">
                   Cancelled Train
                 </span>
               </div>
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <GoDash color="green" className="w-10 h-10" />
-                <span className="text-gray-800 text-lg ml-2">
+              <div className="flex">
+                <GoDash className="w-10 h-10 text-blue-600" />
+                <span className="text-gray-800 text-lg ml-2 font-semibold ">
                   Terminated Train
                 </span>
               </div>
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <GoDash color="blue" className="w-10 h-10" />{" "}
-                <GoDash color="red" className="w-10 h-10" />
-                <span className="text-gray-800 text-lg ml-2">
+              <div className="flex">
+                <GoDash className="w-10 h-10 text-green-600" />
+                <GoDash className="w-10 h-10 text-red-600" />
+                <span className="text-gray-800 text-lg ml-2 font-semibold">
                   Enroute Cancellation
                 </span>
               </div>
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div className="flex">
                 <img
                   src="./images/train-icon.png"
                   alt="Train Icon"
                   className="w-10 h-10"
                 />
-                <span className="text-gray-800 text-lg ml-2">
+                <span className="text-gray-800 text-lg ml-2 font-semibold">
                   Train Current Location
                 </span>
               </div>
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div className="flex">
                 <img
                   src="./images/black dot.png"
                   alt="Black Dot"
-                  className="w-10 h-10"
+                  className="w-7 h-7 ml-2 "
                 />
-                <span className="text-gray-800 text-lg ml-2">
+                <span className="text-gray-800 text-lg ml-6 font-semibold">
                   Train Destination
                 </span>
               </div>
-              <div
-                className="legend-item mr-4"
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div className="flex">
                 <img
                   src="./images/black dot 2.png"
                   alt="Black Dot 2"
                   className="w-10 h-10"
                 />
-                <span className="text-gray-800 text-lg ml-2">
-                  Train Departure Location
+                <span className="text-gray-800 text-lg ml-2 font-semibold">
+                  Location Of Departure{" "}
                 </span>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </footer>
   );
 };

@@ -23,8 +23,7 @@ function Home() {
   const [isSidebarRightOpen, setIsSidebarRightOpen] = useState(false);
 
   const [location, setLocation] = useState({ lat: 53.79648, lng: -1.54785 });
-  console.log(error);
-  console.log(data);
+
   const destinationMarker = new Icon({
     iconUrl: "../../Images/black dot.png",
     iconSize: [12, 12],
@@ -84,8 +83,6 @@ function Home() {
     setData(reset);
   };
 
-  const currentDateTime = new Date();
-
   const mapContainerStyle = {
     position: "fixed",
     width: "100%",
@@ -94,7 +91,6 @@ function Home() {
 
   return (
     <>
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       <SidebarLeft
         isOpen={isSidebarLeftOpen}
         closeSidebar={closeSidebar}
@@ -226,15 +222,15 @@ function Home() {
                       const validMovements = processedMovement.filter(
                         (movement) => movement.latLong
                       );
-                      let color = "blue";
+                      let color = "green";
 
                       if (trainInfo.cancelled) {
                         color = "red";
                       }
                       if (validMovements.length > 0 && trainInfo.cancelled) {
-                        color = "blue";
-                      } else if (trainInfo.lastReportedType === "TERMINATED") {
                         color = "green";
+                      } else if (trainInfo.lastReportedType === "TERMINATED") {
+                        color = "blue";
                       }
 
                       const lastProcessedMovement =

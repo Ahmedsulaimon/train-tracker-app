@@ -8,7 +8,7 @@ const LocationInfo = ({ latitude, longitude }) => {
     const fetchLocation = async () => {
       try {
         const response = await axios.get(
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDUQBtCGL6_KtW0FJrCtCmfr_P7R0C-7T0`
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=`
         );
         console.log(response.data.results);
         if (response.data.results.length > 0) {
