@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaAngleUp, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { FiKey } from "react-icons/fi";
 import { GoDash } from "react-icons/go";
 
@@ -15,7 +15,7 @@ const Footer = () => {
       <p className="">© 2024 3Squared. All rights reserved.</p>
       <div className="relative mx-auto">
         <button
-          className="flex items-center space-x-2 focus:outline-none"
+          className="flex items-center space-x-2 focus:outline-none mr-40"
           onClick={toggleDropup}
         >
           <span className=" flex font-semibold text-lg">
@@ -23,7 +23,6 @@ const Footer = () => {
             <FiKey />
             Journey Legend
           </span>
-          <FaAngleUp className={`transform ${dropupVisible && "rotate-180"}`} />
         </button>
         {dropupVisible && (
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-[600px] h-[300px] overflow-y-auto py-2 bg-white text-gray-800 shadow-lg rounded-t-lg">
