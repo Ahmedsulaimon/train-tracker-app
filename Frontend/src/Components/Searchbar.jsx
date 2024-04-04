@@ -12,6 +12,7 @@ const SearchBar = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const [selectedTiploc, setSelectedTiploc] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
   // Debounced search handler
   const handleSearch = debounce((query) => {
@@ -27,6 +28,7 @@ const SearchBar = ({
     );
 
     setFilteredResults(results);
+    setNotFound(results.length === 0); // Set notFound to true if no results found
   }, 300);
 
   useEffect(() => {
@@ -59,7 +61,7 @@ const SearchBar = ({
         />
       </form>
       {filteredResults.length > 0 && (
-        <div className="absolute top-full mt-1 bg-white shadow-lg rounded-md z-10 overflow-y-auto max-h-40">
+        <div className="absolute top-full mt-1 bg-white shadow-lg rounded-md z-10 overflow-y-auto max-h-40 w-80 font-semibold">
           {filteredResults.map((result) => (
             <button
               key={result.Tiploc}
@@ -79,6 +81,11 @@ const SearchBar = ({
               {result.DisplayName}
             </button>
           ))}
+        </div>
+      )}
+      {notFound && (
+        <div className="absolute top-full mt-1 bg-white shadow-lg rounded-md z-10 p-2 w-80 text-center font-semibold">
+          Not Found
         </div>
       )}
     </div>
