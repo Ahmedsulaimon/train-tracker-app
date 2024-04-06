@@ -22,13 +22,15 @@ API_KEY=add key
 
 type "cd frontend" and press enter
 
-next, type "npm i" and press enter
+ type "npm install" , press enter and type in “npm run dev” to start the application.
 
 open another powershell in your terminal
 
 type "cd backend" and press enter
 
-next, type "npm i" and press enter
+next, type "npm install" and press enter
+
+Type in “npm run dev” to run the server
 
 Finally, add this link to your browser to display the application (http://localhost:5173/)
 
